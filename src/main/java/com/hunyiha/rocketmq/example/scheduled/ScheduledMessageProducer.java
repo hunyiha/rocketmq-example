@@ -16,6 +16,11 @@ import org.apache.rocketmq.common.message.Message;
  *  定时消息会暂存在名为SCHEDULE_TOPIC_XXXX的topic中，并根据delayTimeLevel存入特定的queue，
  *    queueId = delayTimeLevel – 1，即一个queue只存相同延迟的消息，保证具有相同发送延迟的消息能够顺序消费。
  *    broker会调度地消费SCHEDULE_TOPIC_XXXX，将消息写入真实的topic。
+ *
+ *  延时消息的使用场景:
+ *      比如电商里，提交了一个订单就可以发送一个延时消息，1h后去检查这个订单的状态，如果还是未付款就取消订单释放库存。
+ *
+ *
  */
 public class ScheduledMessageProducer {
     public static void main(String[] args) throws Exception {
